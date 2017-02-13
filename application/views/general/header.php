@@ -47,17 +47,17 @@
 
    <script type="text/javascript">
     $(document).ready(function(){
-        $('#bttAdd').click(function(){
-            var addname = $('#addname').val();
-            $.ajax({
-                type:'POST',
-                data:{'addname':addname},
-                url:'<?php echo site_url('Client/addBookName'); ?>',
-                success:function(result){
-                    $('#result').html(result);
-                }
-            }) ;
-        });
+        // $('#bttAdd').click(function(){
+        //     var addname = $('#addname').val();
+        //     $.ajax({
+        //         type:'POST',
+        //         data:{'addname':addname},
+        //         url:'<?php echo site_url('Client/addBookName'); ?>',
+        //         success:function(result){
+        //             $('#result').html(result);
+        //         }
+        //     }) ;
+        // });
     });
 </script>
 </head>

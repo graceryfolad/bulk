@@ -28,7 +28,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('/Client/AddressBook'); ?>">
+                            <a href="<?php echo site_url('/Books/AddressBook'); ?>">
                                 <i class="fa fa-book"></i> <span>Address Books</span> 
                             </a>
                         </li>

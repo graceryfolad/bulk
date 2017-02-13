@@ -34,7 +34,7 @@ class User extends CI_Model {
 
                 $ret = $this->db->insert($this->table, $this);
 
-                return $ret;
+        return $ret;
         }
 
         public function update_entry()
@@ -49,23 +49,33 @@ class User extends CI_Model {
                 return $ret;
         }
 
-        public function AUser($id)
-        {
-                $this->db->select();
-                $this->db->from($this->table);
-        
-                $query = $this->db->where('cl_id', $id);
-                $query = $this->db->get();
+        public function AUser($id) {
+        $this->db->select();
+        $this->db->from($this->table);
+
+        $query = $this->db->where('cl_id', $id);
+        $query = $this->db->get();
 
 
-                return $query->result();
+        $qy = $query->result();
+        foreach ($qy as $row) {
+            $toreturn = array(
+                'name' => $row->cl_comp,
+                'email' => $row->cl_email,
+                'phone' => $row->cl_phone,
+                'id' => $row->cl_id,
+                'regdate' => $row->cl_date,
+            );
         }
 
-        public function Search($search)
+        return $toreturn;
+    }
+
+    public function Search($search)
         {
                 $this->db->select();
                 $this->db->from($this->table);
-                $this->db->like('cl_email', $search); 
+                $this->db->like('cl_email', $search);
                 $this->db->or_like('cl_comp', $search);
                 $query = $this->db->get();
                 if($query->num_rows() > 0)

@@ -8,7 +8,7 @@ class MY_Controller extends CI_Controller
         /*Loading the default libraries, helper, language */
         public function __construct(){
             parent::__construct();
-            $this->load->library(array('session'));
+            $this->load->library(array('session','table'));
             $this->load->helper(array('form','language','url'));
             
         }
