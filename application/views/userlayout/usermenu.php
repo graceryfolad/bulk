@@ -36,14 +36,14 @@
                         
                         
                         <li>
-                            <a href="<?php echo site_url('/Client/Orders'); ?>">
+                            <a href="<?php echo site_url('/Order'); ?>">
                                 <i class="fa fa-desktop"></i> <span>Orders</span>
                                 
                             </a>
                         </li>
 
                         <li>
-                            <a href="<?php echo site_url('/Client/Transactions'); ?>">
+                            <a href="<?php echo site_url('/Transactions'); ?>">
                                 <i class="fa fa-lightbulb-o"></i> <span>Transactions</span>
                                 
                             </a>

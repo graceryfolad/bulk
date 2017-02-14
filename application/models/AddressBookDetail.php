@@ -33,6 +33,7 @@ class AddressBookDetail extends CI_Model {
         $this->db->from($this->table);
 
         $query = $this->db->where('abh_id', $id);
+//        $query = $this->db->where('bk_status', 1);
         $query = $this->db->get();
 
 
@@ -61,7 +62,19 @@ class AddressBookDetail extends CI_Model {
         $query = $this->db->get();
 
 
+        $toreturn = array();
         $result = $query->result();
+        foreach ($result as $key) {
+            $toreturn[] = array(
+                'id' => $key->bk_id,
+                'name' => $key->emp_name,
+                'phone' => $key->emp_phone,
+                'network' => $key->ph_network,
+                'status' => $key->bk_status
+            );
+        }
+
+        return $toreturn;
     }
 
 }

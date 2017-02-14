@@ -65,6 +65,7 @@ class User extends CI_Model {
                 'phone' => $row->cl_phone,
                 'id' => $row->cl_id,
                 'regdate' => $row->cl_date,
+                
             );
         }
 

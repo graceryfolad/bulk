@@ -20,7 +20,14 @@ class Orders extends CI_Model{
         
         public function insert_entry() {
             $ret = $this->db->insert($this->table, $this);
-            return $ret;
+            if($ret){
+                $order = $this->GetID($this->cl_id, $this->abh_id);
+            return $order;
+            }
+            else{
+                return FALSE;
+            }
+            
         }
         
          public function AOrder($id) {
@@ -113,6 +120,29 @@ class Orders extends CI_Model{
         }
         public function UpdateTotal($total) {
             
+        }
+        public function GetID($cl_id,$abh_id) {
+            $this->db->select();
+            $this->db->from($this->table);
+
+            $this->db->where('cl_id', $cl_id);
+            $this->db->where('abh_id', $abh_id);
+            $query = $this->db->get();
+
+
+            $qy = $query->result();
+            foreach ($qy as $row) {
+                $toreturn = array(
+                    'amount' => $row->ord_amount,
+                    'total' => $row->ord_total,
+                    'client' => $row->cl_id,
+                    'id' => $row->ord_id,
+                    'header' => $row->abh_id,
+                    'created' => $row->ord_created,
+                );
+            }
+
+            return $toreturn;
         }
         
         

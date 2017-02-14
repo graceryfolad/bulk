@@ -53,7 +53,8 @@ class Account extends CI_Model {
                                 'user' => $row->cl_id,
                                 'status' => $row->acc_status,
                                 // 'code' => $row->sis_user_staff_code,
-                                'logged_in' => TRUE
+                                'logged_in' => TRUE,
+                                'air'=>$row->air_id,
                             );
                         }
 
