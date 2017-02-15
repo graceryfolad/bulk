@@ -52,6 +52,30 @@ class AddressBookDetail extends CI_Model {
         return $toreturn;
     }
 
+    public function AbookByStatus($id) {
+
+        $this->db->select();
+        $this->db->from($this->table);
+
+        $query = $this->db->where('abh_id', $id);
+        $query = $this->db->where('bk_status', 1);
+        $query = $this->db->get();
+
+
+        $toreturn = array();
+        $result = $query->result();
+        foreach ($result as $key) {
+            $toreturn[] = array(
+                'id' => $key->bk_id,
+                'name' => $key->emp_name,
+                'phone' => $key->emp_phone,
+                'network' => $key->ph_network,
+                'status' => $key->bk_status
+            );
+        }
+
+        return $toreturn;
+    }
     public function Allbooks() {
 
         $this->db->select();

@@ -33,7 +33,7 @@ class Order extends MY_Controller {
         
         public function PlacerOrder() {
             
-            $bkbyheader = $this->AddressBookDetail->Abook($this->input->post('bk'));
+            $bkbyheader = $this->AddressBookDetail->AbookByStatus($this->input->post('bk'));
             $this->Orders->abh_id = $this->input->post('bk');
             $this->Orders->ord_amount = $this->input->post('amount');
             $this->Orders->cl_id = $this->sessiondetails['id'];
@@ -86,19 +86,31 @@ class Order extends MY_Controller {
                     // call airvend
                     $username = "folad2012@gmail.com";
                     $pass = "5678";
+                    
+//                    var_dump($order_detail);
+//                    exit();
                     $air = $this->airvend->CallVTU($amount, $networkid,$username,$pass,$order_detail['id'],$value['phone']);
 //                    
 //                    update table for the status
                     if($air){
                         $this->OrderDetails->UpdateStatus($order_detail['id'],1);
                     }
-//                    */$result[]=$air;
+//                    $result[]=$air;
                     
                 }
                 
                 }
+//                var_dump($result);
+                redirect("/Order/OrderDetails/{$ref}");
                 
-                var_dump($result);
             }
+        }
+        
+        public function OrderDetails($ord_id) {
+            $ord_det = $this->OrderDetails->OrderDetailsByOrder($ord_id,$this->sessiondetails['id']);
+            $this->data['orddet']=$ord_det;
+            $this->body = "userlayout/orderdetails";
+
+            $this->userlayout();
         }
 }

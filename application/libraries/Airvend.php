@@ -29,10 +29,11 @@ class Airvend {
 
         $xml = simplexml_load_string($response);
         $json = json_encode($xml);
-        if ($json->ResponseCode ==0) {
-            return TRUE;
-        } else {
-            return FALSE;
+        $obj = json_decode($json);
+        if(is_object($obj)){
+            if($obj->ResponseCode ==0){
+                return TRUE;
+            }
         }
 
         return FALSE;

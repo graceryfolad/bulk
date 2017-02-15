@@ -46,7 +46,7 @@
 
 <div class="box box-solid box-info">
   <div class="box-header with-border">
-    <h3 class="box-title">Place Order</h3>
+    <h3 class="box-title">Orders Placed</h3>
 <!--    <div class="box-tools pull-right">
        Buttons, labels, and many other things can be placed here! 
        Here is a label for example 
@@ -54,7 +54,32 @@
     </div> /.box-tools -->
   </div><!-- /.box-header -->
   <div class="box-body">
-      
+       <?php
+            if ($orders != NULL) {
+                $template = array(
+                    'table_open' => '<table class="table table-bordered">'
+                );
+                $this->table->set_template($template);
+                $this->table->set_heading('#', 'Order ID', 'Amount', 'Total Staff', 'Order Details');
+                $count = 1;
+                foreach ($orders as $value) {
+                    $cell1 = array('data' => $count);
+                    $cell2 = array('data' => $value['id']);
+//                    $cell3 = array('data' => $value['book']);
+                    $cell4 = array('data' => $value['amount']);
+                    $cell5 = array('data' => $value['total']);
+                    $cell6 = array('data' => anchor("/Order/OrderDetails/{$value['id']}", '<i class="fa fa-search"></i>'));
+                    
+
+                    $this->table->add_row($cell1, $cell2,  $cell4, $cell5, $cell6);
+                    $count++;
+                }
+                echo $this->table->generate();
+            } else {
+                echo 'No record found';
+            }
+            ?>
+        </div>
   </div><!-- /.box-body -->
   
 </div><!-- /.box -->

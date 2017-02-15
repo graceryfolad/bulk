@@ -62,10 +62,42 @@ class OrderDetails extends CI_Model {
     }
 
     public function UpdateStatus($det_id, $status) {
-        $this->det_status = $status;
-
-        $ret = $this->db->update($this->table, $this, array('det_id' => $det_id));
+        $data = array(
+            'det_status'=>$status
+        );
+        
+        $this->db->where('det_id',$det_id);
+        $ret = $this->db->update($this->table, $data);
         return $ret;
+    }
+    
+    public function OrderDetailsByOrder($ord_id,$cl_id) {
+        $this->db->select();
+        $this->db->from($this->table);
+
+        $this->db->where('cl_id', $cl_id);
+        $this->db->where('ord_id', $ord_id);
+        
+        $query = $this->db->get();
+
+
+        $qy = $query->result();
+        foreach ($qy as $row) {
+            $toreturn[] = array(
+                'amount' => $row->amount,
+//                    'total' => $row->ord_total,
+                'client' => $row->cl_id,
+                'id' => $row->det_id,
+                'header' => $row->abh_id,
+                'network' => $row->network,
+                'phone' => $row->phone,
+                'status' => $row->det_status,
+                'created' => $row->det_created,
+                'order' => $row->ord_id,
+            );
+        }
+
+        return $toreturn;
     }
 
 }

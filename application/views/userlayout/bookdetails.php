@@ -52,11 +52,11 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="empName">
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="empName" required="required">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Phone Number</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone">
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone" required="required">>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Network</label>

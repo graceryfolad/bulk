@@ -56,14 +56,14 @@ class Orders extends CI_Model{
             $this->db->select();
             $this->db->from($this->table);
 
-            $this->db->where('cl_id', $id);
+            $this->db->where('cl_id', $cl_id);
             $query = $this->db->get();
 
 
             $qy = $query->result();
             foreach ($qy as $row) {
                 $toreturn[] = array(
-                    'amount' => $row->cl_comp,
+                    'amount' => $row->ord_amount,
                     'total' => $row->ord_total,
                     'client' => $row->cl_id,
                     'id' => $row->ord_id,
