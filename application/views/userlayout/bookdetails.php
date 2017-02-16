@@ -24,9 +24,9 @@
                     $cell5 = array('data' => anchor("/Books/EditBookDetail/{$value['id']}", '<i class="fa fa-edit"></i>'));
 
                     if ($value['status'] == 1) {
-                        $cell6 = array('data' => anchor("/Books/EditBookDetail/{$value['id']}/disable", '<i class="fa fa-edit"></i>'));
+                        $cell6 = array('data' => "Enabled");
                     } else {
-                        $cell6 = array('data' => anchor("/Books/EditBookDetail/{$value['id']}/enable", '<i class="fa fa-edit"></i>'));
+                        $cell6 = array('data' => "Disabled");
                     }
 
                     $this->table->add_row($cell1, $cell2, $cell3, $cell4, $cell5, $cell6);
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Phone Number</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone" required="required">>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number" name="phone" required="required">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Network</label>
