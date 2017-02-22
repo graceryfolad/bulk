@@ -31,7 +31,10 @@ class Books extends MY_Controller {
         // $this->data['inc'] = 1;
         if ($abh_id == null) {
             $result = $this->AddressBook->BooksClientID($this->sessiondetails['id']);
-            $this->data['Books'] = $result;
+            if(is_array($result)){
+                $this->data['Books'] = $result;
+            }
+            
             //var_dump($result);
         } else {
             $result = $this->AddressBookDetail->Abook($abh_id);
@@ -75,5 +78,44 @@ class Books extends MY_Controller {
         }
     }
     
+    public function UpdateBookStatus() {
+        $list = $this->input->post('adrst');
+        $status = $this->input->post('enstatus');
+        $bkid = $this->input->post('bkid');
+        $this->AddressBookDetail->UpdateDetailStatus($list, $status);
+        
+        redirect("/Books/AddressBook/{$bkid}");
+    }
+    
+    public function EditBookDetail($id) {
+        $bkdet = $this->AddressBookDetail->ADetail($id);
+        if(is_array($bkdet)){
+            $this->data['bkdet']=$bkdet;
+        }
 
+         $this->body = "userlayout/bkdet";
+
+        $this->userlayout();
+    }
+
+    public function EditBkDet()
+    {
+       if(array_key_exists('submitupdate', $_POST)){
+            $name = $this->input->post('empName');
+            $phone = $this->input->post('phone');
+            $network = $this->input->post('network');
+            $id = $this->input->post('hd');
+
+            $test = $this->AddressBookDetail->EditBkDetails($id,$name,$phone,$network);
+
+
+            if($test)
+            {
+                redirect("/Books/EditBookDetail/{$id}");
+            }
+            else{
+                redirect("/Books/AddressBook");
+            }
+       }
+    }
 }

@@ -22,33 +22,26 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span><?php echo $userinfo['name']; ?><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    <img src="img/avatar3.png" class="img-circle" alt="User Image" />
-                                    <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
+                                
                                 <!-- Menu Body -->
-                                <!-- <li class="user-body">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
+                                 <li class="user-body">
+                                    <div class="col-xs-6 text-center">
+                                       <a href="<?php echo site_url('/Client/AirvendAccount'); ?>">Airvend Account</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
+                                    <div class="col-xs-6 text-center">
+                                        <a href="#">Change Password</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </li> -->
+                                    
+                                </li> 
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href="<?php echo site_url('/Client/Profile'); ?>" class="btn btn-default btn-flat">Profile</a>
+                                        
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?php echo site_url('/Client/LogOut'); ?>" class="btn btn-default btn-flat">Sign Out</a>

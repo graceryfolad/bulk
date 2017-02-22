@@ -34,7 +34,8 @@ class Order extends MY_Controller {
         public function PlacerOrder() {
             
             $bkbyheader = $this->AddressBookDetail->AbookByStatus($this->input->post('bk'));
-            $this->Orders->abh_id = $this->input->post('bk');
+            $hd = $this->input->post('bk');
+            $this->Orders->abh_id = $hd;
             $this->Orders->ord_amount = $this->input->post('amount');
             $this->Orders->cl_id = $this->sessiondetails['id'];
             $this->Orders->ord_total = count($bkbyheader);
@@ -84,12 +85,12 @@ class Order extends MY_Controller {
                     
                     
                     // call airvend
-                    $username = "folad2012@gmail.com";
-                    $pass = "5678";
+                    // $username = "folad2012@gmail.com";
+                    // $pass = "5678";
                     
 //                    var_dump($order_detail);
 //                    exit();
-                    $air = $this->airvend->CallVTU($amount, $networkid,$username,$pass,$order_detail['id'],$value['phone']);
+                    $air = $this->airvend->CallVTU($amount, $networkid,$$this->sessiondetails['username'] ,$this->sessiondetails['password'] ,$order_detail['id'],$value['phone']);
 //                    
 //                    update table for the status
                     if($air){
@@ -101,16 +102,18 @@ class Order extends MY_Controller {
                 
                 }
 //                var_dump($result);
-                redirect("/Order/OrderDetails/{$ref}");
+                redirect("/Order/OrderDetails/{$ref}/{$hd}");
                 
             }
         }
         
-        public function OrderDetails($ord_id) {
+        public function OrderDetails($ord_id,$abh_id) {
             $ord_det = $this->OrderDetails->OrderDetailsByOrder($ord_id,$this->sessiondetails['id']);
+            $book = $this->AddressBook->Abook($abh_id);
             $this->data['orddet']=$ord_det;
+            $this->data['book']=$book;
             $this->body = "userlayout/orderdetails";
-
+//            var_dump($book);
             $this->userlayout();
         }
 }

@@ -15,12 +15,14 @@ class Client extends MY_Controller {
         
         $this->load->helper('html');
         $this->load->library('form_validation');
+        $this->load->library('airvend');
     }
 	public function index()
 
 	{
 		$this->data['inc'] = 1;
 		$this->body = "userlayout/userhome";
+//                var_dump($this->sessiondetails);
 
         $this->userlayout();
 	}
@@ -36,8 +38,10 @@ class Client extends MY_Controller {
 
     {
         // $this->data['inc'] = 1;
+        $balance = $this->airvend->Balance($this->sessiondetails['username'], $this->sessiondetails['password']);
+        $this->data['balance']=$balance;
         $this->body = "userlayout/wallet";
-
+        
         $this->userlayout();
     }
 
@@ -52,7 +56,10 @@ class Client extends MY_Controller {
         }
         else{
            $result = $this->AddressBookDetail->Abook($abh_id);
+           if(is_array($result)){
            $this->data['details'] = $result; 
+           }
+ 
         }
         $this->body = "userlayout/addrbk";
        
@@ -100,5 +107,35 @@ class Client extends MY_Controller {
 
     public function EditBookName() {
         
+    }
+
+    public function AirvendAccount(){
+        if(array_key_exists('updateairvend', $_POST)){
+            $username = $this->input->post('username');
+            $pass = $this->input->post('password');
+            $id=$this->sessiondetails['id'];
+            $ret = $this->User->UpdateAirvend($username,$pass,$id);
+            if($ret){
+                // get the user info again
+
+                $this->session->unset_userdata('userdetails');
+
+                $auser = $this->User->AUser($id);
+                 $this->session->set_userdata('userdetails', $auser);
+
+                 $this->sessiondetails = $this->session->userdata('userdetails');
+                 $this->data['userinfo'] = $this->sessiondetails;
+
+            }
+         
+        }
+        $this->data['userinfo'] = $this->sessiondetails;
+
+
+        $this->data['air_us']=$this->sessiondetails['username'];
+        $this->data['air_ps']=$this->sessiondetails['password'];
+
+        $this->body = "userlayout/airven";
+        $this->userlayout();
     }
 }

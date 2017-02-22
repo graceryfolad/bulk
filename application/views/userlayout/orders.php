@@ -46,7 +46,7 @@
 
 <div class="box box-solid box-info">
   <div class="box-header with-border">
-    <h3 class="box-title">Orders Placed</h3>
+    <h3 class="box-title text-center">Orders Placed</h3>
 <!--    <div class="box-tools pull-right">
        Buttons, labels, and many other things can be placed here! 
        Here is a label for example 
@@ -60,18 +60,18 @@
                     'table_open' => '<table class="table table-bordered">'
                 );
                 $this->table->set_template($template);
-                $this->table->set_heading('#', 'Order ID', 'Amount', 'Total Staff', 'Order Details');
+                $this->table->set_heading('#', 'Order ID','Date', 'Amount', 'Total Staff', 'Order Details');
                 $count = 1;
                 foreach ($orders as $value) {
                     $cell1 = array('data' => $count);
                     $cell2 = array('data' => $value['id']);
-//                    $cell3 = array('data' => $value['book']);
+                    $created = array('data' => $value['created']);
                     $cell4 = array('data' => $value['amount']);
                     $cell5 = array('data' => $value['total']);
-                    $cell6 = array('data' => anchor("/Order/OrderDetails/{$value['id']}", '<i class="fa fa-search"></i>'));
+                    $cell6 = array('data' => anchor("/Order/OrderDetails/{$value['id']}/{$value['header']}", '<i class="fa fa-search"></i>'));
                     
 
-                    $this->table->add_row($cell1, $cell2,  $cell4, $cell5, $cell6);
+                    $this->table->add_row($cell1, $cell2,$created,  $cell4, $cell5, $cell6);
                     $count++;
                 }
                 echo $this->table->generate();

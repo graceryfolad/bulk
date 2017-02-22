@@ -13,7 +13,7 @@
 <section class="content">
 <div class="col-md-12">
     <?php
-    echo form_open('/Client/addBookName', array('class' => "form-inline"));
+    echo form_open('/Books/addBookName', array('class' => "form-inline"));
     ?>
 	<input type="text" id="addname" name="addname" class="form-control">
 	<input type="submit" id="bttAdd" value="Add" />  

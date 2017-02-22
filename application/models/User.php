@@ -8,6 +8,8 @@ class User extends CI_Model {
         public $cl_address;
         public $cl_id;
         public $cl_date;
+        public $air_us;
+        public $air_ps;
 
         private $table;
         public function __construct()
@@ -65,7 +67,8 @@ class User extends CI_Model {
                 'phone' => $row->cl_phone,
                 'id' => $row->cl_id,
                 'regdate' => $row->cl_date,
-                
+                'username'=>$row->air_us,
+                'password'=>$row->air_ps
             );
         }
 
@@ -97,6 +100,19 @@ class User extends CI_Model {
                 }
 
                 return false;
+        }
+
+        public function UpdateAirvend($username,$password,$id){
+            $data = array(
+                'air_us'=>$username,
+                'air_ps'=>$password
+                );
+
+            $this->db->where('cl_id',$id);
+            $ret =$this->db->update($this->table,$data);
+
+            return $ret;
+
         }
 
 }

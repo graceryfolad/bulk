@@ -13,7 +13,13 @@
 <section class="content">
     <div class="box box-solid box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Orders Placed</h3>
+            <h3 class="box-title">Orders Placed: 
+            <?php
+                if(isset($book)){
+                echo "Book Title {$book['name']}";
+            }
+            ?>
+            </h3>
             <!--    <div class="box-tools pull-right">
                    Buttons, labels, and many other things can be placed here! 
                    Here is a label for example 
@@ -22,6 +28,7 @@
         </div><!-- /.box-header -->
         <div class="box-body">
             <?php
+            
             if ($orddet != NULL) {
                 $template = array(
                     'table_open' => '<table class="table table-bordered">'

@@ -68,11 +68,14 @@ class Account extends CI_Model {
 
         public function Reset($new_ps,$id) 
         {
-                $this->acc_ps=$this->hashKey($new_ps);
-                 $ret = $this->db->update($this->table, $this, array('us_id' =>$id ));
+                $data = array('acc_pwd'=>$this->hashKey($new_ps));
+                    $this->db->where('acc_id',$id);
+                 $ret = $this->db->update($this->table, $data);
 
                 return $ret;
         }
+
+        
 
 }
 ?>
